@@ -4,11 +4,18 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const date = require(__dirname + "/date.js");
 const _ = require("lodash");
+// import dotenv from 'dotenv';
+require('dotenv').config();
 
 app.set('view engine', "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-mongoose.connect("mongodb+srv://shivamnegi2424:to-doList24@cluster0.dmlx2bw.mongodb.net/toDoListDB");
+
+
+const USERNAME=process.env.DB_USERNAME;
+const PASSWORD=process.env.DB_PASSWORD;
+
+mongoose.connect(`mongodb+srv://${USERNAME}:${PASSWORD}@cluster0.dmlx2bw.mongodb.net/toDoListDB`);
 
 const itemsSchema = {
     name: String
